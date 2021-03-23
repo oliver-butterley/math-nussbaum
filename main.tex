@@ -1,0 +1,109 @@
+\documentclass[a4paper,11pt]{amsart}
+\usepackage[british]{babel}
+\usepackage[colorlinks=true,citecolor=black,linkcolor=black]{hyperref}
+\usepackage{cite,tikz,amssymb}
+\usepackage[notcite, notref, color]{showkeys}
+\usepackage{enumerate}
+
+%%%%%%% Draft watermark
+\usepackage[ddmmyy]{datetime}
+\usepackage{tikz,tikz-cd, tikzpagenodes, lmodern}
+\usepackage[pages=all]{background}
+\backgroundsetup{angle=0, opacity=0.5, scale=1, contents= {   
+\begin{tikzpicture}[remember picture, overlay, scale=3]           
+\fontsize{20}{10}\selectfont
+\node[text=red,rotate=270, above=1.5cm] at (current page text area.east) 
+{\textsc{Warning -- Draft version -- {\today} -- Read at your own risk ;-)}};
+\end{tikzpicture} }}
+%%%%%%%%%%%%
+
+
+%%%%%%%%%% Theorems
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+%%%%%%%%%% Custom notation
+\newcommand{\abs}[1]{\left|#1\right|} % Absolute value
+\newcommand{\id}{\operatorname{id}} % The identity
+\newcommand{\cA}{\mathcal{A}} % Abelian differentials
+\newcommand{\cB}{\mathcal{B}} % Banach space
+\newcommand{\cC}{\mathcal{C}} % Differentiable
+\newcommand{\cI}{\mathcal{I}} % Horizontal intervals
+\newcommand{\bC}{\mathbb{C}} % Complex numbers
+\newcommand{\cD}{\mathcal{D}} % Distributions
+\newcommand{\cF}{\mathcal{F}} % Foliations
+\newcommand{\cG}{\mathcal{G}} % Closed subspaces
+\newcommand{\cH}{\mathcal{H}} % Cohomology bundle
+\newcommand{\bJ}{\mathbb{J}} % Index set
+\newcommand{\cK}{\mathcal{K}} % Bundle of smooth functions
+\newcommand{\bT}{\mathbb{T}} % Torus
+\newcommand{\cL}{\mathcal{L}} % Transfer operator
+\newcommand{\cM}{\mathcal{M}} % Moduli space
+\newcommand{\cT}{\mathcal{T}} % Teichmüller space
+\newcommand{\cZ}{\mathcal{Z}} % Current
+\newcommand{\cU}{\mathcal{U}} % Neighbourhood
+\newcommand{\mm}{\operatorname{m}} % Measure
+\newcommand{\bN}{\mathbb{N}} % Natural numbers
+\newcommand{\norm}[1]{\left\|#1\right\|} % Norm
+\newcommand{\bR}{\mathbb{R}} % Reals
+\newcommand{\bZ}{\mathbb{Z}} % Integers
+\newcommand{\cO}{\operatorname{O}} % Big O notation
+\newcommand{\supp}{\operatorname{Supp}} % Support
+\newcommand{\codim}{\operatorname{codim}} % Codimension
+\newcommand{\nc}[1]{{\left|#1\right|}_{\lozenge}} % Ball measure of non-compactness
+\newcommand{\dist}[2]{\operatorname{d}(#1,#2)} % Distance
+\newcommand{\dx}{X} % Horizontal vector field
+\newcommand{\dy}{Y} % Vertical vector field
+
+\begin{document}
+\title{Measure of non-compactness and the essential spectral radius}
+%\date{}
+
+\author{Oliver Butterley}
+\address{(Oliver Butterley) Dipartimento di Matematica, II Università di Roma (Tor Vergata) -- Via della Ricerca Scientifica -- Roma -- 00133 -- Italy}
+\email{butterley@mat.uniroma2.it}
+
+
+\begin{abstract}
+    An estimate on the measure of non-compactness implies and estimate on the essential spectral radius.
+\end{abstract}
+
+
+
+\maketitle
+% \thispagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{thebibliography}{10}
+    % spell-checker: disable 
+
+    \bibitem{Davies07}
+    E.~B. Davies.
+    \newblock Linear Operators and Their Spectra.
+    \newblock \emph{Cambridge studies in advanced mathematics}, 106. Cambridge University Press (2007).
+
+    \bibitem{Hennion93}
+    H.~Hennion.
+    \newblock Sur un th\'{e}orem spectral et son application aux noyaux Lipchitziens,
+    \newblock \emph{Proc. Amer. Math. Soc.} 118 (1993) 627--634.
+
+    \bibitem{Nussbaum70}
+    R.D.~Nussbaum.
+    \newblock The radius of the essential spectrum.
+    \newblock \emph{Duke Math. J.} 37 (1970) 473--478.
+
+    % spell-checker: enable 
+\end{thebibliography}
+
+\end{document}
