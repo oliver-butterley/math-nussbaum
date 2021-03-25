@@ -3,7 +3,7 @@
 \usepackage[colorlinks=true,citecolor=black,linkcolor=black]{hyperref}
 \usepackage{cite,tikz,amssymb}
 \usepackage[notcite, notref, color]{showkeys}
-\usepackage{enumerate}
+\usepackage[normalem]{ulem}
 
 %%%%%%% Draft watermark
 \usepackage[ddmmyy]{datetime}
@@ -13,13 +13,13 @@
 \begin{tikzpicture}[remember picture, overlay, scale=3]           
 \fontsize{20}{10}\selectfont
 \node[text=red,rotate=270, above=1.5cm] at (current page text area.east) 
-{\textsc{Warning -- Draft version -- {\today} -- Read at your own risk ;-)}};
+{\textsc{Draft version -- {\today}}};
 \end{tikzpicture} }}
 %%%%%%%%%%%%
 
 
 %%%%%%%%%% Theorems
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{theorem}{Theorem}
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{lemma}[theorem]{Lemma}
@@ -29,36 +29,24 @@
 
 %%%%%%%%%% Custom notation
 \newcommand{\abs}[1]{\left|#1\right|} % Absolute value
-\newcommand{\id}{\operatorname{id}} % The identity
-\newcommand{\cA}{\mathcal{A}} % Abelian differentials
-\newcommand{\cB}{\mathcal{B}} % Banach space
-\newcommand{\cC}{\mathcal{C}} % Differentiable
-\newcommand{\cI}{\mathcal{I}} % Horizontal intervals
-\newcommand{\bC}{\mathbb{C}} % Complex numbers
-\newcommand{\cD}{\mathcal{D}} % Distributions
-\newcommand{\cF}{\mathcal{F}} % Foliations
-\newcommand{\cG}{\mathcal{G}} % Closed subspaces
-\newcommand{\cH}{\mathcal{H}} % Cohomology bundle
-\newcommand{\bJ}{\mathbb{J}} % Index set
-\newcommand{\cK}{\mathcal{K}} % Bundle of smooth functions
-\newcommand{\bT}{\mathbb{T}} % Torus
-\newcommand{\cL}{\mathcal{L}} % Transfer operator
-\newcommand{\cM}{\mathcal{M}} % Moduli space
-\newcommand{\cT}{\mathcal{T}} % Teichmüller space
-\newcommand{\cZ}{\mathcal{Z}} % Current
-\newcommand{\cU}{\mathcal{U}} % Neighbourhood
-\newcommand{\mm}{\operatorname{m}} % Measure
-\newcommand{\bN}{\mathbb{N}} % Natural numbers
 \newcommand{\norm}[1]{\left\|#1\right\|} % Norm
+\newcommand{\id}{\operatorname{I}} % The identity
+\newcommand{\cB}{\mathcal{B}} % Banach space
+\newcommand{\cC}{\mathcal{C}} % Banach space
+\newcommand{\bC}{\mathbb{C}} % Complex numbers
+\newcommand{\bN}{\mathbb{N}} % Natural numbers
 \newcommand{\bR}{\mathbb{R}} % Reals
 \newcommand{\bZ}{\mathbb{Z}} % Integers
-\newcommand{\cO}{\operatorname{O}} % Big O notation
-\newcommand{\supp}{\operatorname{Supp}} % Support
-\newcommand{\codim}{\operatorname{codim}} % Codimension
+\newcommand{\Ker}{\operatorname{Ker}} % Kernel
+\newcommand{\Ran}{\operatorname{Ran}} % Range
+\newcommand{\Coker}{\operatorname{Coker}} % Cokernel
+\newcommand{\EssSpec}{\operatorname{EssSpec}} % Essential spectrum
 \newcommand{\nc}[1]{{\left|#1\right|}_{\lozenge}} % Ball measure of non-compactness
-\newcommand{\dist}[2]{\operatorname{d}(#1,#2)} % Distance
-\newcommand{\dx}{X} % Horizontal vector field
-\newcommand{\dy}{Y} % Vertical vector field
+\newcommand{\EssRad}{\operatorname{EssRad}} % Essential spectral radius
+\newcommand{\cG}{\mathcal{G}} % 
+\newcommand{\cL}{\mathcal{L}} % 
+\newcommand{\cR}{\mathcal{R}} % 
+
 
 \begin{document}
 \title{Measure of non-compactness and the essential spectral radius}
@@ -73,14 +61,95 @@
     An estimate on the measure of non-compactness implies and estimate on the essential spectral radius.
 \end{abstract}
 
-
-
 \maketitle
 % \thispagestyle{empty}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+
+A bounded operator \(A : \cB \to \cC\) between two Banach spaces is said to be a \emph{Fredholm} operator if its kernel \(\Ker A\) and cokernel \(\Coker A := \cC / \Ran A\) are both finite-dimensional.
+We say that \(\lambda\) lies in the essential spectrum \(\EssSpec(A)\) of a bounded operator \(A\) if \((\lambda \id - A)\) is not a Fredholm operator. 
+The \emph{ball measure of non-compactness} of a bounded operator \(A: \cB \to \cC\) is denoted \(\nc{A}\) and is defined as the infimum of real numbers \(\epsilon>0\) such that the image of the unit ball under \(A\) admits a finite cover by open balls of radius \(\epsilon\).
+% (\(\left\{ x + y : x \in \cB, \norm{x} \leq \epsilon \right\}\) for some \(y\in \cB\)).
+The quantity \(\nc{\cdot}\) is a seminorm on the space of operators, is submultiplicative and \(\nc{A} = 0\) if and only if \(A\) is compact.
+
+\begin{lemma}
+    \label{lem:lim-exists}
+    If \(A\) is a bounded operator on \(\cB\) then the limit 
+    \(\rho := \lim_{n\to \infty} \nc{A^n}^{1/n}\)
+    exists and satisfies \(0\leq \rho \leq \nc{A}\).
+\end{lemma}
+\begin{proof}
+    Let \(p(n):= \log \nc{A^n}\) and observe that \(p\) is subadditive in the sense that \(p(m+n) \leq p(m)+p(n)\) for all \(m,n\in\bN\).
+    The lemma then follows from \cite[Lemma 4.1.2]{Davies07}.
+\end{proof}
+
+\begin{lemma}
+    \label{lem:dual-nc}
+    If \(A\) is a bounded operator on \(\cB\) then \(\nc{A^*} \leq 2\nc{A}\).
+\end{lemma}
+
+
+\begin{lemma}
+    \label{lem:is-fredholm}
+    Let \(A\) be a bounded operator on \(\cB\).
+    Then \((\lambda \id - A)\) is Fredholm whenever \(\abs{\lambda} > \displaystyle\lim_{n\to \infty}{\nc{A^n}}^{{1}/{n}}\).
+\end{lemma}
+\begin{proof}
+    Replacing \(A\) with \(\lambda^{-1}A\) it suffices to prove that  \((\id - A)\) is Fredholm whenever \( \lim_{n}{\nc{A^n}}^{{1}/{n}} < 1\).
+
+    Firstly we show that \uline{\(\cL := \Ker(\id -A )\) is finite dimensional}.
+    Fix \(n\in \bN\) sufficiently large such that \(\lim_{n}{\nc{A^n}} < \frac{1}{4}\).
+    In search of contradiction we suppose that \(\cL := \Ker(\id -A )\) fails to be finite dimensional.
+    This means that there exists an infinite sequence \(x_j \in \cL\) such that \(\norm{x_j} = 1\) and \(\norm{x_j - x_k}\geq \frac{3}{4}\) whenever \(j\neq k\).
+    Since \(A^n x_j = x_j\) for each \(j\), \(\norm{A^n x_j - A^n x_k} =  \norm{x_j - x_k} \geq \frac{3}{4}\) whenever \(j\neq k\).
+    On the other hand, since \(\cup_{j}x_{j}\) is a subset of the unit ball and \(\nc{A^n} < \frac{1}{4}\), we know that \(\cup_{j} A^n x_j\) can be covered by a finite number of \(\frac{1}{4}\)-balls.
+    This is a contradiction.
+    
+    Secondly we show that \uline{\(\cR:=\Ran(\id -A )\) is closed}.
+    Let \(g_k \in \cR\) be a sequence which converges to \(g\).
+    We need to show that \(g\in \cR\).
+    For each \(k\) let \(f_k\) be such that \(g_k = (\id -A)f_k\).
+    This means that \(f_k =  g_k + A f_k\) and, iterating, that \(f_k = \sum_{j=0}^{n-1} A^{j} g_k +  A^{n} f_k\) for any \(n\in \bN\).
+    Observe that the set \(\cG:={\{g_k\}}_{k} \cup \{g\}\) is compact and consequently that \(\sum_{j=0}^{n-1} A^{j} \cG\) is compact.
+    Moreover, since \( \lim_{n}{\nc{A^n}}^{{1}/{n}} < 1\), for any \(\epsilon>0\), there exists \(n\in \bN\) such that \(A^{n} \left( \cup_{k}f_k \right)\) can be covered by a finite number of \(\epsilon\)-balls.
+    This means that there exists a subsequence of \(f_{k}\) which converges to some \(f\) and so \(g = (\id -A)f \in \cR\).
+
+    Finally we show that \uline{\(\Coker(\lambda \id -A )\) is finite dimensional}.
+    Since \(\Ran(\id -A )\) is closed, an application of the Hahn-Banach theorem implies that its codimension equals the dimension of \(\Ker(\id -A^{*})\) in \(\cB^{*}\).
+    By Lemma~\ref{lem:dual-nc} the first paragraph applies.
+\end{proof}
+
+
+The essential spectral radius is defined as 
+\[
+    \EssRad(A) := \sup \left\{ \abs{z} : z \in \EssSpec(A) \right\}.
+\]
+
+\begin{theorem}
+    Let \(A\) be a bounded operator on \(\cB\).
+    Then  
+    \[
+        \EssRad(A) = \lim_{n\to \infty}{\nc{A^n}}^{{1}/{n}}.
+    \]
+\end{theorem}
+\begin{proof}
+    Lemma~\ref{lem:is-fredholm} implies that \(\EssRad(A) \leq \lim_{n}{\nc{A^n}}^{{1}/{n}}\).
+    For the other part....
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Notes}
+
+\begin{enumerate}
+    \item The notation and definitions used here match Davies' book~\cite{Davies07}.
+    \item Lemma~\ref{lem:is-fredholm} is a generalization of \cite[Lemma 4.3.3]{Davies07}.
+    \item Lemma~\ref{lem:dual-nc} is \cite[Lemma 2]{Nussbaum70}.
+    \item The spectral decomposition of an operator using spectral projectors and a remainder operator with spectral radius arbitrarily close to the essential spectral radius is implied by \cite[Theorem 4.3.18]{Davies07}.
+    \item A good overview of measures of non-compactness and the essential spectrum can be found in \cite[\S I.4]{EE87}.
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -89,9 +158,14 @@
     % spell-checker: disable 
 
     \bibitem{Davies07}
-    E.~B. Davies.
-    \newblock Linear Operators and Their Spectra.
+    E.B. Davies.
+    \newblock Linear Operators and their Spectra.
     \newblock \emph{Cambridge studies in advanced mathematics}, 106. Cambridge University Press (2007).
+
+    \bibitem{EE87}
+    D.E.~Edmunds \& W.D.~Evans. 
+    Spectral Theory and Differential Operators. 
+    \emph{Oxford Clarendon Press} (1987).
 
     \bibitem{Hennion93}
     H.~Hennion.

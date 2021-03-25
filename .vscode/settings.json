@@ -3,6 +3,11 @@
         "Codimension",
         "Hennion",
         "Nussbaum",
+        "cokernel",
+        "infimum",
+        "seminorm",
+        "subadditive",
+        "submultiplicative"
     ],
     "latex-workshop.latex.tools": [
         {
